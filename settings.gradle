@@ -1,1 +1,25 @@
-rootProject.name = 'module'
+rootProject.name = 'spring-core'
+
+// yaml import 설정
+include 'kuku-yaml-import'
+
+// batch application 설정
+include 'kuku-batch-application'
+
+// 외부 api 연동
+include 'kuku-external-service'
+
+// security 설정
+include 'kuku-security-service'
+
+// db
+include 'kuku-common-database'
+
+// 공통 도메인 모듈
+include 'kuku-common-domain'
+
+// 카프카 서비스
+include 'kuku-kafka-service'
+
+// kotlin 모듈
+include 'kuku-kotlin-module'
