@@ -23,3 +23,6 @@ include 'kuku-kafka-service'
 
 // kotlin 모듈
 include 'kuku-kotlin-module'
+
+// main api 모듈
+include 'kuku-main-api'

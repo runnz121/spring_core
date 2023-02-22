@@ -1,76 +1,163 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.2'
-	id 'io.spring.dependency-management' version '1.1.0'
-	id 'org.asciidoctor.jvm.convert' version '3.3.2'
-}
-
-group = 'kuku'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
+buildscript {
+	ext {
+		springBootVersion = '3.0.2'
+		querydslPluginVersion = '1.0.10'
+		queryDslVersion = '5.0.0'
+	}
+	// plugin repository 설정
+	repositories {
+		mavenCentral()
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		classpath "io.spring.gradle:dependency-management-plugin:1.1.0"
+		classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}")
 	}
 }
 
-repositories {
-	mavenCentral()
-}
+// 하위 공통 모듈 적용
+subprojects {
 
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-	set('testcontainersVersion', "1.17.6")
-}
+	apply plugin: 'java'
+	apply plugin: 'groovy'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-amqp'
-	implementation 'org.springframework.boot:spring-boot-starter-batch'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.flywaydb:flyway-mysql'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
-	implementation 'org.springframework.kafka:spring-kafka'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.amqp:spring-rabbit-test'
-	testImplementation 'org.springframework.batch:spring-batch-test'
-	testImplementation 'org.springframework.kafka:spring-kafka-test'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:kafka'
-	testImplementation 'org.testcontainers:mongodb'
-	testImplementation 'org.testcontainers:mysql'
-	testImplementation 'org.testcontainers:postgresql'
-	testImplementation 'org.testcontainers:rabbitmq'
-}
+	group = 'kuku'
+	version = '1.0-SNAPSHOT'
+	sourceCompatibility = '17'
 
-dependencyManagement {
-	imports {
-		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	// 공통 사용 dependencies
+	dependencies {
+		compileOnly 'org.projectlombok:lombok'
+		implementation 'org.springframework.boot:spring-boot-starter-validation'
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.springframework.boot:spring-boot-starter'
+		implementation 'org.springframework.data:spring-data-commons'
+	}
+}
+// querydsl 설정
+def queryDslProjects = [project(':kuku-common-database')]
+configure(queryDslProjects) {
+	// Q class 생성 위치
+	def queryDslSrcDir = "$buildDir/generated/querydsl"
+
+	apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+	querydsl {
+		library = "com.querydsl:querydsl-apt"
+		jpa = true
+		querydslSourcesDir = queryDslSrcDir
+	}
+	// querydsl dependencies 추가
+	dependencies {
+		compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
+		compile "com.querydsl:querydsl-apt:${queryDslVersion}"
+		compile "com.querydsl:querydsl-core:${queryDslVersion}"
+	}
+
+	// queryDsl compile 설정 바탕으로 시작
+	compileQuerydsl{
+		options.annotationProcessorPath = configurations.querydsl
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+		querydsl.extendsFrom compileClasspath
 	}
 }
 
-tasks.named('test') {
-	outputs.dir snippetsDir
-	useJUnitPlatform()
-}
 
-tasks.named('asciidoctor') {
-	inputs.dir snippetsDir
-	dependsOn test
-}
+//tasks.named('test') {
+//	outputs.dir snippetsDir
+//	useJUnitPlatform()
+//}
+//
+//tasks.named('asciidoctor') {
+//	inputs.dir snippetsDir
+//	dependsOn test
+//}
+
+
+//plugins {
+//	id 'java'
+//	id 'org.springframework.boot' version '3.0.2'
+//	id 'io.spring.dependency-management' version '1.1.0'
+//	id 'org.asciidoctor.jvm.convert' version '3.3.2'
+//	// querydsl 5.0 이상 추가
+//	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+//}
+//
+//group = 'kuku'
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '17'
+//
+//configurations {
+//	compileOnly {
+//		extendsFrom annotationProcessor
+//	}
+//}
+//
+//repositories {
+//	mavenCentral()
+//}
+//
+//ext {
+//	set('snippetsDir', file("build/generated-snippets"))
+//	set('testcontainersVersion', "1.17.6")
+//}
+//
+//dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+//	implementation 'org.springframework.boot:spring-boot-starter-batch'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+//	implementation 'org.springframework.boot:spring-boot-starter-validation'
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.flywaydb:flyway-core'
+//	implementation 'org.flywaydb:flyway-mysql'
+//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+//	implementation 'org.springframework.kafka:spring-kafka'
+//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+//	compileOnly 'org.projectlombok:lombok'
+//	runtimeOnly 'com.h2database:h2'
+//	runtimeOnly 'com.mysql:mysql-connector-j'
+//	runtimeOnly 'org.postgresql:postgresql'
+//	annotationProcessor 'org.projectlombok:lombok'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+//	testImplementation 'org.springframework.batch:spring-batch-test'
+//	testImplementation 'org.springframework.kafka:spring-kafka-test'
+//	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+//	testImplementation 'org.springframework.security:spring-security-test'
+//	testImplementation 'org.testcontainers:junit-jupiter'
+//	testImplementation 'org.testcontainers:kafka'
+//	testImplementation 'org.testcontainers:mongodb'
+//	testImplementation 'org.testcontainers:mysql'
+//	testImplementation 'org.testcontainers:postgresql'
+//	testImplementation 'org.testcontainers:rabbitmq'
+//}
+
+//dependencyManagement {
+//	imports {
+//		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+//	}
+//}
+
