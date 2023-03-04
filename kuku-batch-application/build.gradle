@@ -1,0 +1,28 @@
+bootJar {
+    archiveFileName = "ROOT.jar"
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+
+    implementation project(':kuku-yaml-import')
+
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    // jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // mybatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // mysql
+    implementation 'com.mysql:mysql-connector-j'
+    // postgresql
+    implementation 'org.postgresql:postgresql'
+
+    testImplementation 'org.springframework.batch:spring-batch-test'
+}
