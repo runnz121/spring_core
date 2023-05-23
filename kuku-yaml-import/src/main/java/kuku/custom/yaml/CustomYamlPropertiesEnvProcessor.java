@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,6 +22,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Profiles;
 import org.springframework.core.env.PropertySource;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -28,16 +30,19 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 
 public class CustomYamlPropertiesEnvProcessor implements EnvironmentPostProcessor, Ordered {
 
-    private static final int DEFAULT_ORDER = 0;
+    private static final int DEFAULT_ORDER = Ordered.LOWEST_PRECEDENCE;
     private static final String SPRING_PROFILES = "spring.profiles";
-    private static final String RESOURCE_PATH = "classpath*:config/*.yml";
+    private static final String RESOURCE_PATH = "classpath*:config/common-*.yml";
     private final YamlPropertySourceLoader loader = new YamlPropertySourceLoader();
 
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
 
-        ResourceLoader resourceLoader = application.getResourceLoader();
+        ResourceLoader resourceLoader = Optional
+            .ofNullable(application.getResourceLoader())
+            .orElseGet(DefaultResourceLoader::new);
+
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(resourceLoader);
         Resource[] resources = new Resource[]{};
 
@@ -98,6 +103,7 @@ public class CustomYamlPropertiesEnvProcessor implements EnvironmentPostProcesso
                                                        List<PropertySource<?>> propertySourceList) {
 
         String[] activeProfiles = environment.getActiveProfiles();
+
         return IntStream.range(0, activeProfiles.length)
             .map(idx -> activeProfiles.length - idx - 1)
             .mapToObj(idx -> activeProfiles[idx])

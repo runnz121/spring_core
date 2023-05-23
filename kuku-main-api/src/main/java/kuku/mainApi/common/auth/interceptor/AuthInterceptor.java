@@ -16,7 +16,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
 
         String jwtAuthToken = request.getHeader("Authorization");
-        boolean isActiveToken = checkJwtToken(jwtAuthToken);
+      //  boolean isActiveToken = checkJwtToken(jwtAuthToken);
 
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
@@ -29,12 +29,12 @@ public class AuthInterceptor implements HandlerInterceptor {
         HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 
-    private boolean checkJwtToken(String authToken) {
-
-
-    }
-
-    private
+    // private boolean checkJwtToken(String authToken) {
+    //
+    //
+    // }
+    //
+    // private
 
 
 

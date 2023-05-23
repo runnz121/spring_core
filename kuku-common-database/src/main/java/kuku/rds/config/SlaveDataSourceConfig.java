@@ -22,40 +22,36 @@ import jakarta.persistence.EntityManagerFactory;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-    entityManagerFactoryRef = "masterEntityManagerFactory",
-    transactionManagerRef = "masterTransactionManager",
-    basePackages = {"kuku.rds.master.repository"}
+    entityManagerFactoryRef = "slaveEntityManagerFactory",
+    transactionManagerRef = "slaveTransactionManager",
+    basePackages = {"kuku.rds.slave.repository"}
 )
-public class MasterDataSourceConfig {
+public class SlaveDataSourceConfig {
 
-    @Primary
     @Bean
-    @ConfigurationProperties("master.datasource")
-    public DataSourceProperties masterDataSourceProperties() {
+    @ConfigurationProperties("slave.datasource")
+    public DataSourceProperties slaveDataSourceProperties() {
         return new DataSourceProperties();
     }
 
-    @Primary
     @Bean
-    @ConfigurationProperties("master.datasource.configuration")
-    public DataSource masterDataSource(@Qualifier("masterDataSourceProperties") DataSourceProperties dataSourceProperties) {
+    @ConfigurationProperties("slave.datasource.configuration")
+    public DataSource slaveDataSource(@Qualifier("slaveDataSourceProperties") DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
-    @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean masterEntityManagerFactory(EntityManagerFactoryBuilder builder,
-        @Qualifier("masterDataSource") DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean slaveEntityManagerFactory(EntityManagerFactoryBuilder builder,
+        @Qualifier("slaveDataSource") DataSource dataSource) {
         return builder
             .dataSource(dataSource)
             .packages("kuku.rds.domain")
-            .persistenceUnit("masterEntityManager")
+            .persistenceUnit("slaveEntityManager")
             .build();
     }
 
-    @Primary
     @Bean
-    public PlatformTransactionManager masterTransactionManager(@Qualifier("masterEntityManagerFactory")
+    public PlatformTransactionManager slaveTransactionManager(@Qualifier("slaveEntityManagerFactory")
         EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }

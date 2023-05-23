@@ -26,10 +26,10 @@ dependencies {
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    // querydsl
-    implementation "com.querydsl:querydsl-jpa"
-    implementation "com.querydsl:querydsl-apt"
-    implementation "com.querydsl:querydsl-core"
+    // querydsl -> jakarta 패키지 임포트 안되서 5.0.0 명시적으로 작성해줌
+    implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    implementation "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    implementation "com.querydsl:querydsl-core:5.0.0"
 
     compile("com.querydsl:querydsl-core")
     compile("com.querydsl:querydsl-jpa")

@@ -1,0 +1,19 @@
+---
+spring:
+  profiles: local
+  jpa:
+
+master:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/core?autoReconnect=true
+    username: root
+    password: 698427
+    maximum-pool-size: 10
+slave:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/core?autoReconnect=true
+    username: root
+    password: 698427
+    maximum-pool-size: 10
