@@ -10,19 +10,21 @@ configurations {
 dependencies {
 
     implementation project(':kuku-yaml-import')
+    implementation project(':kuku-common-database')
+    implementation project(':kuku-kafka-service')
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
 
     // jpa
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     // mybatis
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     // mysql
-    implementation 'com.mysql:mysql-connector-j'
+//    implementation 'com.mysql:mysql-connector-j'
     // postgresql
-    implementation 'org.postgresql:postgresql'
+//    implementation 'org.postgresql:postgresql'
 
     testImplementation 'org.springframework.batch:spring-batch-test'
 }
