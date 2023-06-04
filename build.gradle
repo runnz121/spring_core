@@ -13,6 +13,7 @@ buildscript {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 		classpath "io.spring.gradle:dependency-management-plugin:1.1.0"
 		classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}")
+
 	}
 }
 
@@ -40,7 +41,8 @@ subprojects {
 
 	// 공통 사용 dependencies
 	dependencies {
-		compileOnly 'org.projectlombok:lombok'
+		implementation 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
 		implementation 'org.springframework.boot:spring-boot-starter-validation'
 		implementation 'org.springframework.boot:spring-boot-starter-web'
 		implementation 'org.springframework.boot:spring-boot-starter'
