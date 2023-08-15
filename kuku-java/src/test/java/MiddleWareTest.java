@@ -5,9 +5,6 @@ import org.kuku.middleWare.MiddleWareTask;
 
 public class MiddleWareTest {
 
-
-
-    @Test
     public void middleWareTest() {
 
     }

@@ -27,4 +27,5 @@ include 'kuku-kotlin-module'
 // main api 모듈
 include 'kuku-main-api'
 include 'kuku-java'
+include 'kuku-rx-java'
 
