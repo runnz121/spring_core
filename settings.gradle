@@ -28,4 +28,5 @@ include 'kuku-kotlin-module'
 include 'kuku-main-api'
 include 'kuku-java'
 include 'kuku-rx-java'
+include 'kuku-batch-legacy'
 
