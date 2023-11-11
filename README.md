@@ -15,3 +15,8 @@
 - 데이터가 변경될 떄마다 이벤트 발생 -> 지속적 전달(변경)
 - push : 데이터 변화 발생시 발생한 곳에서 데이터 전달
 - pull : 변경 데이터 확인 후 변경된 데이터를 갖고옴 
+
+
+### kuku-main
+- request scope bean을 async 에서 사용하기
+- https://medium.com/soobr/harnessing-the-power-of-request-scoped-beans-requestscope-in-a-non-web-based-request-dc09b1b46373

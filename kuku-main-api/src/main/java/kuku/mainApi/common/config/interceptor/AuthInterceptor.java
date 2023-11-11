@@ -30,41 +30,28 @@ public class AuthInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
 
-        String jwtAuthToken = request.getHeader("Authorization");
-      //  boolean isActiveToken = checkJwtToken(jwtAuthToken);
-
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
 
         AuditUser auditUser = null;
 
         if (Objects.isNull(authentication) || ! StringUtils.hasText(authentication.getName())) {
-            auditUser =  AuditUser.builder().auditName(ANONYMOUS).build();
+            auditUser =  AuditUser.from(ANONYMOUS);
         } else {
-            auditUser = AuditUser.builder().auditName(authentication.getName()).build();
+            auditUser = AuditUser.from(authentication.getName());
         }
+
+        request.setAttribute("requestUser", auditUser);
 
         MDC.put("user", auditUser.getAuditName());
 
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+        return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+
     }
-
-    // private boolean checkJwtToken(String authToken) {
-    //
-    //
-    // }
-    //
-    // private
-
-
-
-
-
 }

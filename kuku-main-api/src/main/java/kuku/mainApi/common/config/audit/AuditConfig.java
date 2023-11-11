@@ -12,9 +12,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Configuration
 public class AuditConfig {
 
-    @Bean(name = "auditConfigUser")
-    @Scope(value = "request" , proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public AuditUser auditConfig() {
+    @Bean
+    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public AuditUser auditUser() {
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = attributes.getRequest();

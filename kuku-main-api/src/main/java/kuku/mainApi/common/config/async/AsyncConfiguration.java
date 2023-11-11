@@ -13,15 +13,15 @@ import java.util.concurrent.Executor;
 @EnableAsync
 @RequiredArgsConstructor
 public class AsyncConfiguration implements AsyncConfigurer {
-    
+
     private final TaskExecutionProperties taskExecutionProperties;
-    
+
     @Override
     @Bean(name = "taskExecutor")
     public Executor getAsyncExecutor() {
         log.info("custom AsyncConfiguration");
-        
-        return getAsyncExecutor(
+
+        return getExecutor(
                 taskExecutionProperties.getPool(),
                 taskExecutionProperties.getThreadNamePrefix()
         );

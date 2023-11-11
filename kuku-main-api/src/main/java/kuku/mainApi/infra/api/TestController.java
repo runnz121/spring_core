@@ -1,6 +1,6 @@
 package kuku.mainApi.infra.api;
 
-import kuku.mainApi.application.test.TestRepository;
+import kuku.mainApi.application.test.TestAsyncService;
 import kuku.mainApi.application.test.TestService;
 import kuku.mainApi.domain.test.TestEntity;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/test")
@@ -18,6 +19,7 @@ import java.util.List;
 public class TestController {
 
     private final TestService testService;
+    private final TestAsyncService testAsyncService;
 
     @GetMapping("/list")
     public ResponseEntity<List<TestEntity>> getList() {
@@ -25,5 +27,15 @@ public class TestController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(testService.getTestEntityList());
+    }
+
+    @GetMapping("/log")
+    public void getLog() {
+        testService.logTestService();
+    }
+
+    @GetMapping("/log/async")
+    public void getAsyncLog() {
+        testAsyncService.logAsyncTestService();
     }
 }
