@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/test")
@@ -37,5 +36,10 @@ public class TestController {
     @GetMapping("/log/async")
     public void getAsyncLog() {
         testAsyncService.logAsyncTestService();
+    }
+
+    @GetMapping("/event")
+    public void sendEvent() {
+        testService.sendEvent();
     }
 }

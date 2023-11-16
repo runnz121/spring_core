@@ -1,5 +1,6 @@
 package kuku.mainApi.application.test;
 
+import kuku.mainApi.application.event.TestEventPublisher;
 import kuku.mainApi.common.value.auth.AuditUser;
 import kuku.mainApi.domain.test.TestEntity;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class TestService {
 
     private final TestRepository testRepository;
     private final AuditUser auditUser;
+    private final TestEventPublisher testEventPublisher;
 
     public List<TestEntity> getTestEntityList() {
         return testRepository.findAll();
@@ -24,5 +26,9 @@ public class TestService {
 
         System.out.println(auditUser.getAuditName());
         log.info("logTestService : {}", auditUser.getAuditName());
+    }
+
+    public void sendEvent() {
+        testEventPublisher.publish();
     }
 }

@@ -20,3 +20,6 @@
 ### kuku-main
 - request scope bean을 async 에서 사용하기
 - https://medium.com/soobr/harnessing-the-power-of-request-scoped-beans-requestscope-in-a-non-web-based-request-dc09b1b46373
+
+- spring event
+- https://mangkyu.tistory.com/292
