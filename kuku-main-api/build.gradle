@@ -18,6 +18,11 @@ dependencies {
     }
     // tomcat 대신 undertow 사용
     implementation("org.springframework.boot:spring-boot-starter-undertow")
+
+    implementation 'org.apache.commons:commons-fileupload2:2.0.0-M1'
+//    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
+//    implementation group: 'commons-io', name: 'commons-io', version: '2.15.0'
+
 }
 
 
