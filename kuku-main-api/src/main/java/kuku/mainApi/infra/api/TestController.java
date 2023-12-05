@@ -40,6 +40,6 @@ public class TestController {
 
     @GetMapping("/event")
     public void sendEvent() {
-        testService.sendEvent();
+        testService.sendEventPublish();
     }
 }

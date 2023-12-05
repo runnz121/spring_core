@@ -9,9 +9,4 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class TestServiceImpl implements TestService {
 
-    public void toMultipartFile() {
-
-        CommonsMu
-    }
-
 }

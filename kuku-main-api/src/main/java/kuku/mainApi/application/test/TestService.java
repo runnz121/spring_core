@@ -6,6 +6,7 @@ import kuku.mainApi.domain.test.TestEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,7 +29,20 @@ public class TestService {
         log.info("logTestService : {}", auditUser.getAuditName());
     }
 
+    @Transactional
+    public void sendEventPublish() {
+
+        // 1. @TransactionalEventListener 가 적용된 listener는 (listenAfterCommit)
+        testEventPublisher.eventTransactionPublish();
+
+        // 2. 해당 에러 발생시 eventListener 로그가 찍히지 않는다.
+        throw new RuntimeException();
+
+        // 3. 즉 이 메서드의 transactional이 끝나면 그 다음에 event publish 된다..
+    }
+
     public void sendEvent() {
-        testEventPublisher.publish();
+
+        testEventPublisher.eventPublish();
     }
 }

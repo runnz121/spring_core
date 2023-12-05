@@ -11,12 +11,21 @@ public class TestEventPublisher {
 
     private final ApplicationEventPublisher publisher;
 
-    public void publish(){
+    public void eventPublish(){
 
         publisher.publishEvent(TestEntity.builder()
                         .name("test")
                         .value("testValue")
                         .build()
+        );
+    }
+
+    public void eventTransactionPublish() {
+
+        publisher.publishEvent(TestEntity.builder()
+                .name("test")
+                .value("testValue")
+                .build()
         );
     }
 }

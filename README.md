@@ -23,3 +23,9 @@
 
 - spring event
 - https://mangkyu.tistory.com/292
+
+- spring event transactionalEventListener
+- https://cheese10yun.github.io/event-transaction/
+- @TransactionalEventListener + async 동작한다
+- publish.event 하는 메서드에 @Trnasactional 붙어 있으면 해당 트랜잭션이 commit이 되고 실행한다
+- 에러 발생시 event publish 안됨
