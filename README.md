@@ -18,13 +18,13 @@
 
 
 ### kuku-main
-- request scope bean을 async 에서 사용하기
+1. request scope bean을 async 에서 사용하기
 - https://medium.com/soobr/harnessing-the-power-of-request-scoped-beans-requestscope-in-a-non-web-based-request-dc09b1b46373
 
-- spring event
+2. spring event
 - https://mangkyu.tistory.com/292
 
-- spring event transactionalEventListener
+3. spring event transactionalEventListener
 - https://cheese10yun.github.io/event-transaction/
 - @TransactionalEventListener + async 동작한다
 - publish.event 하는 메서드에 @Trnasactional 붙어 있으면 해당 트랜잭션이 commit이 되고 실행한다
