@@ -1,6 +1,6 @@
 package org.kuku.concurrency.example1;
 
-public class Example2 {
+public class ContextSwitch {
 
     public static void main(String[] args) {
 

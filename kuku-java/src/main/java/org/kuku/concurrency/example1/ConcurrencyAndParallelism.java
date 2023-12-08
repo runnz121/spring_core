@@ -3,7 +3,7 @@ package org.kuku.concurrency.example1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Example1 {
+public class ConcurrencyAndParallelism {
 
     public static void main(String[] args) {
 
