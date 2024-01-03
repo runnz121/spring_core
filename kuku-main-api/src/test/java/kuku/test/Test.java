@@ -1,8 +1,9 @@
 package kuku.test;
 
+import jakarta.persistence.Temporal;
+
 public class Test {
 
-    @org.junit.jupiter.api.Test
     void test() {}
 
 }
