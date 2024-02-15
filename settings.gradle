@@ -29,4 +29,5 @@ include 'kuku-main-api'
 include 'kuku-java'
 include 'kuku-rx-java'
 include 'kuku-batch-legacy'
+include 'kuku-search'
 

@@ -1,5 +1,9 @@
 package org.kuku.concurrency.example2;
 
+/**
+ * 단일 스레드와 다르게 모든 스레드가 종료되어야 애플리케이션이 종료된다.
+ *
+ */
 public class MultiThreadExample {
 
     public static void main(String[] args) {
