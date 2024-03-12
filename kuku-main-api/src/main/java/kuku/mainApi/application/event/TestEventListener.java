@@ -16,25 +16,26 @@ public class TestEventListener {
 
     private final TestRepository testRepository;
 
-//    @EventListener
+    @EventListener
+    @Async("eventAsync")
+    public void listen(TestEntity entity) {
+
+        log.info("event 수신 : {}" , entity);
+
+        Long savedID = testRepository.save(entity).getId();
+        throw new RuntimeException();
+
+//        log.info("savedId : {}", savedID);
+    }
+
+//    @TransactionalEventListener
 //    @Async("eventAsync")
-//    public void listen(TestEntity entity) {
+//    public void listenAfterCommit(TestEntity entity) {
 //
-//        log.info("event 수신 : {}" , entity);
+//        log.info("TransactionalEventListener 수신 : {}" , entity);
 //
 //        Long savedID = testRepository.save(entity).getId();
 //
-//        log.info("savedId : {}", savedID);
+//        log.info("TransactionalEventListener : {}", savedID);
 //    }
-
-    @TransactionalEventListener
-    @Async("eventAsync")
-    public void listenAfterCommit(TestEntity entity) {
-
-        log.info("TransactionalEventListener 수신 : {}" , entity);
-
-        Long savedID = testRepository.save(entity).getId();
-
-        log.info("TransactionalEventListener : {}", savedID);
-    }
 }

@@ -45,4 +45,14 @@ public class TestController {
     public void sendEvent() {
         testService.sendEventPublish();
     }
+
+    @GetMapping("/event/async")
+    public void asyncEvent() {
+        testService.sendEvent();
+    }
+
+    @GetMapping("/async")
+    public void async() {
+        testService.async();
+    }
 }

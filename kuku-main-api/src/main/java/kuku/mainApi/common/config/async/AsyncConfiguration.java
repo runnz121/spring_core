@@ -1,7 +1,9 @@
 package kuku.mainApi.common.config.async;
 
+import kuku.mainApi.common.config.async.Excpetion.KukuAsyncUncaughtExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.AsyncConfigurer;

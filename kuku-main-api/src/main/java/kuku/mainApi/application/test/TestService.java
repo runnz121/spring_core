@@ -18,6 +18,7 @@ public class TestService {
     private final TestRepository testRepository;
     private final AuditUser auditUser;
     private final TestEventPublisher testEventPublisher;
+    private final TestAsyncService testAsyncService;
 
     public List<TestEntity> getTestEntityList() {
         return testRepository.findAll();
@@ -44,5 +45,16 @@ public class TestService {
     public void sendEvent() {
 
         testEventPublisher.eventPublish();
+
+        log.info("event publish 완료");
+    }
+
+    @Transactional
+    public void async() {
+        log.info("====async testService start===");
+        testAsyncService.asyncNormal();
+        log.info("====async testService end===");
+
+        testRepository.save(TestEntity.builder().name("async").value("async").build());
     }
 }

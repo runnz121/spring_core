@@ -18,4 +18,10 @@ public class TestAsyncService {
         System.out.println(auditUser.getAuditName());
         log.info("logAsyncTestService : {}", auditUser.getAuditName());
     }
+
+    @Async("asyncNormal")
+    public void asyncNormal() {
+        log.info("===testAsyncService start====");
+        throw new RuntimeException();
+    }
 }
