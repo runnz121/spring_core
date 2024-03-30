@@ -1,5 +1,7 @@
 package kuku.mainApi.infra.api;
 
+import kuku.mainApi.application.ApplicationService;
+import kuku.mainApi.application.service.design.templateCallback.TemplateService;
 import kuku.mainApi.application.test.TestAsyncService;
 import kuku.mainApi.application.test.TestService;
 import kuku.mainApi.common.config.aop.TimeCheck;
@@ -20,6 +22,7 @@ public class TestController {
 
     private final TestService testService;
     private final TestAsyncService testAsyncService;
+    private final ApplicationService applicationService;
 
     @TimeCheck
     @GetMapping("/list")
@@ -54,5 +57,10 @@ public class TestController {
     @GetMapping("/async")
     public void async() {
         testService.async();
+    }
+
+    @GetMapping("/template")
+    public TestEntity template() {
+        return applicationService.templateExecute();
     }
 }
