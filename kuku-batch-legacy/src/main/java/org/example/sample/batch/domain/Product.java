@@ -1,8 +1,9 @@
 package org.example.sample.batch.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -11,6 +12,6 @@ public class Product {
     @Id
     private Long id;
     private String name;
-    private int price;
+    private Integer price;
     private String type;
 }

@@ -1,6 +1,5 @@
 package org.example.sample.batch.job.file;
 
-import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.example.sample.batch.chunk.processor.FileItemProcessor;
 import org.example.sample.batch.domain.Product;
@@ -20,6 +19,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+
+import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @RequiredArgsConstructor
@@ -62,6 +63,7 @@ public class FileJobConfiguration {
                 .targetType(ProductVO.class)
                 .linesToSkip(1) // 제목은 스킵
                 .delimited().delimiter(",")
+                // 컬럼이름
                 .names("id", "name", "price", "type")
                 .build();
     }
