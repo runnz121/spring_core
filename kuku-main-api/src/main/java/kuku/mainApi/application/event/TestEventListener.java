@@ -1,13 +1,12 @@
 package kuku.mainApi.application.event;
 
-import kuku.mainApi.application.test.TestRepository;
 import kuku.mainApi.domain.test.TestEntity;
+import kuku.mainApi.domain.test.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.event.TransactionalEventListener;
 
 @Slf4j
 @Component

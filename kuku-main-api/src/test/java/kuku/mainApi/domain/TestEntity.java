@@ -1,4 +1,4 @@
-package kuku.mainApi.application.domain;
+package kuku.mainApi.domain;
 
 import lombok.Builder;
 import lombok.Data;
