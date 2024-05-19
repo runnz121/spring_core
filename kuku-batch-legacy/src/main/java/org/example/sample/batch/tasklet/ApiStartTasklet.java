@@ -6,8 +6,12 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 
 public class ApiStartTasklet implements Tasklet {
+
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-        return null;
+
+        System.out.println(" >> Api Service is Started");
+
+        return RepeatStatus.FINISHED;
     }
 }
