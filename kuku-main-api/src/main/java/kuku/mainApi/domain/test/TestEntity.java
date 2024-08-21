@@ -4,7 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.EntityListeners;
+import kuku.mainApi.common.config.orm.KuKuAuditEntityListener;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -13,6 +17,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(KuKuAuditEntityListener.class)
 public class TestEntity {
 
     public static final TestEntity EMPTY = new TestEntity();
@@ -28,6 +33,14 @@ public class TestEntity {
     private Integer totalQuantity;
 
     private Integer usedQuantity;
+
+    private String createBy;
+
+    private LocalDateTime createDate;
+
+    private String updateBy;
+
+    private LocalDateTime updateDate;
 
     @Builder
     public TestEntity(String name, String value) {
