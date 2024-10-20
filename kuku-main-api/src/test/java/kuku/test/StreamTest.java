@@ -4,6 +4,7 @@ import kuku.mainApi.domain.TestEntity;
 import kuku.mainApi.domain.TestEntityInner;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -76,5 +77,17 @@ public class StreamTest {
 
         // [TestEntityInner(id=1, value=1), TestEntityInner(id=2, value=2), TestEntityInner(id=1, value=1), TestEntityInner(id=2, value=2)]
         System.out.println(innerListCollected);
+    }
+
+    @Test
+    void emtpyStreamTest() {
+        List<String> emptyString = new ArrayList<>();
+
+        List<Integer> actual = emptyString
+                .stream()
+                .map(String::length)
+                .toList();
+
+        System.out.println(actual);
     }
 }
