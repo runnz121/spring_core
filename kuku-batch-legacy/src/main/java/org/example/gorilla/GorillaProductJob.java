@@ -7,12 +7,12 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
-@Slf4j
-@Configuration
-@RequiredArgsConstructor
-@ConditionalOnProperty(name = "job.name", havingValue = "gorillaProductJob")
+//@Slf4j
+//@Configuration
+//@RequiredArgsConstructor
+//@ConditionalOnProperty(name = "job.name", havingValue = "gorillaProductJob")
 public class GorillaProductJob {
 
-    private final JobBuilderFactory jobBuilderFactory;
-    private final StepBuilderFactory stepBuilderFactory;
+//    private final JobBuilderFactory jobBuilderFactory;
+//    private final StepBuilderFactory stepBuilderFactory;
 }

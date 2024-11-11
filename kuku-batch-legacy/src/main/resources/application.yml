@@ -3,6 +3,13 @@ logging:
     root: info
 
 spring:
+  profiles:
+    active: local
+  batch:
+    job:
+      names: ${job.name:NONE}
+      enabled: true
+
   datasource:
     read:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -33,7 +40,7 @@ spring:
       hibernate:
         format_sql: true
         use_sql_comments: true
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create-drop
 

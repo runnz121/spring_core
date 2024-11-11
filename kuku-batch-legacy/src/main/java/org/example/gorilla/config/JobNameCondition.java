@@ -12,6 +12,6 @@ public class JobNameCondition implements Condition {
     public boolean matches(ConditionContext context,
                            AnnotatedTypeMetadata metadata) {
         final String currentJobName = context.getEnvironment().getProperty("job.name");
-        return Objects.equals("gorillaProductJob", currentJobName);
+        return Objects.equals("gorillaProductJob1", currentJobName);
     }
 }
