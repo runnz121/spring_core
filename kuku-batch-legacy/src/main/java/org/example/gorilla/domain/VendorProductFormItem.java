@@ -1,4 +1,4 @@
 package org.example.gorilla.domain;
 
-public class GorillaBlockTime {
+public class VendorProductFormItem {
 }
