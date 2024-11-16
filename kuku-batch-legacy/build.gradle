@@ -40,6 +40,8 @@ dependencies {
 
     implementation 'com.vladmihalcea:hibernate-types-52:2.19.2'
 
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
