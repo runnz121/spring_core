@@ -1,2 +1,12 @@
-package PACKAGE_NAME;public class Main {
+package kafka.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MainKafka {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MainKafka.class, args);
+    }
 }
