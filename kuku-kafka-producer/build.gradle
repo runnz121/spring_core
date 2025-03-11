@@ -24,6 +24,12 @@ dependencies {
 
 	implementation 'org.apache.kafka:kafka-clients:3.9.0'
 
+	// https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+//	implementation 'com.github.javafaker:javafaker:1.0.2'
+	implementation ('com.github.javafaker:javafaker:0.14') { exclude module: 'snakeyaml' }
+	implementation group: 'org.yaml', name: 'snakeyaml', version: '1.17'
+
+
 //	implementation 'org.slf4j:slf4j-api:1.7.25'
 
 	testImplementation 'org.slf4j:slf4j-simple:2.0.16'
