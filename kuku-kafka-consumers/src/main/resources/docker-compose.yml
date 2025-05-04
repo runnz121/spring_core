@@ -1,3 +1,5 @@
+# 정상 동작
+
 networks:
   kafka_network:
 
