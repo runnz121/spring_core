@@ -33,3 +33,15 @@
 6. 커스텀 콜백 생성 및 key 별 호출 파티션 확인
 
 ![img_5.png](img_5.png)
+
+---
+
+7. 동일 group_id 에서 컨슈머들이 추가되면 rebalance 된다.
+
+![img_7.png](img_7.png)
+
+---
+
+8. consumer 그룸 추가 및 종료시 메시지 로그
+
+![img_8.png](img_8.png)
