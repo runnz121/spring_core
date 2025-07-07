@@ -1,0 +1,34 @@
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    // module import
+    implementation project(path: ":kuku-common-domain", configuration: 'default')
+    implementation project(path: ":kuku-kafka-service", configuration: 'default')
+    implementation project(path: ":kuku-common-database", configuration: 'default')
+    implementation project(path: ":kuku-external-service", configuration: 'default')
+    implementation project(path: ":kuku-security-service", configuration: 'default')
+    implementation project(path: ":kuku-yaml-import", configuration: 'default')
+
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    // tomcat 대신 undertow 사용
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
+
+    implementation 'org.apache.commons:commons-fileupload2:2.0.0-M1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
+//    implementation group: 'commons-io', name: 'commons-io', version: '2.15.0'
+
+}
+
+
+
+
+bootJar {
+    archiveFileName = 'ROOT.jar'
+}
