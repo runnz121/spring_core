@@ -1,5 +1,7 @@
 # Spring Core
 
+각 모듈 연습 리포 정리
+
 ## kuku-java
 - java 언어만을 사용하여 연습  
 ### 디자인패턴
@@ -22,3 +24,10 @@
 ## kuku-batch-legacy
   - spring batch 2.x 버전을 이용
   - 스프링 배치 버전 연습
+
+## kuku-kafka
+
+   - 카프카 컨슈머
+     - [카프카 컨슈머 정리](./kuku-kafka-consumers/src/README.md)
+   - 카프카 프로듀서
+     - [카프카 프로듀서 정리](./kuku-kafka-producer/src/README.md)
