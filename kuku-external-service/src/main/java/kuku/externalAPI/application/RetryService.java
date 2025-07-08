@@ -44,4 +44,21 @@ public class RetryService {
         }
         return "success at " + attempt;
     }
+
+    @Retryable(
+            value = RuntimeException.class,
+            maxAttempts = 5,
+            backoff = @Backoff(
+                    delay = 200,        // 첫 번째 재시도 전 기다릴 시간(ms)
+                    multiplier = 2.0,    // 매회 delay를 2배로 늘림
+                    maxDelay = 2000      // delay가 이 값을 넘지 않도록 제한 (선택 사항)
+            )
+    )
+    public String delayBackOff() {
+        int attempt = tryCount.incrementAndGet();
+        if (attempt < 3) {
+            throw new RuntimeException("still failing at " + attempt);
+        }
+        return "success at " + attempt;
+    }
 }
